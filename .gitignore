@@ -151,3 +151,6 @@ dmypy.json
 
 AnacondaEnv.bat
 *.png
+
+Main/Temp_for_AE/
+Main/repair_output/output_tensors/
