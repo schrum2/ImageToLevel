@@ -9,6 +9,9 @@ import generators
 import formats
 import repair
 
+# Added
+import Visualize
+import Inputs
 
 # Read the arguments from the command line
 parser = argparse.ArgumentParser()
@@ -60,3 +63,19 @@ if args.output_rep:
 if not args.output_gen and not args.output_rep:
     pp = pprint.PrettyPrinter(indent=4)
     pp.pprint(post_level)
+
+# Added code to output image
+# Locations and Methods:
+dataLocation = "./data/games/"
+gameOptions = sorted(os.listdir(dataLocation))
+print(gameOptions)
+selectedGame = gameOptions[1]
+
+pixelSize = 16
+
+#asciiLevels, sprites, spriteAsciiMap = Inputs.Get_All_Inputs(dataLocation, selectedGame)
+asciiLevelsSMB2, spritesSMB2, spriteAsciiMapSMB2 = Inputs.Get_All_Inputs(dataLocation, "super-mario-bros-simplified")
+
+
+generatedImage = Visualize.visualize(post_level, spritesSMB2, spriteAsciiMapSMB2, pixelSize)
+generatedImage.save("b_Generated.png", "PNG")
