@@ -121,37 +121,37 @@ for selectedGenMethod in generateMethods:
 
     for selectedPixelMethod in pixelMethodsList:
         for selectedRepairMethod in repairMethods:
-            methodInfoString = "Gen-" + selectedGenMethod + selectedPixelMethod + "_Rep-" + selectedRepairMethod
-            processString = (outputFolder + methodInfoString)
-            if not os.path.exists(processString):
-                os.makedirs(processString)
-            inputImage_pil.save(processString + "/" + "a_Original_Resized.png", "PNG")
-
-            # Generate the level from the images======================================================
-            # inputImage => generatedLevel
-            generatedLevel = []
             try:
+                # Generate the level from the images======================================================
+                # inputImage => generatedLevel
+                generatedLevel = []
                 if(selectedGenMethod == 'CNN'):
                     generatedLevel = CNNGen.generate(inputImage_cv, pixelSize, spriteAsciiMap, trainedCNN, patch_width, patch_height)
 
                 if(selectedGenMethod == 'Pixel'):
                     generatedLevel = PixelGen.generate(inputImage_cv, sprites, spriteAsciiMap, pixelSize, selectedPixelMethod)
+
+                methodInfoString = "Gen-" + selectedGenMethod + selectedPixelMethod + "_Rep-" + selectedRepairMethod
+                processString = (outputFolder + methodInfoString)
+                if not os.path.exists(processString):
+                    os.makedirs(processString)
+                inputImage_pil.save(processString + "/" + "a_Original_Resized.png", "PNG")
+
+                tileFileLocation = processString + "/" + "before_repair.txt"
+                with open(tileFileLocation, 'w') as f:
+                    f.write("\n".join(map(lambda x : "".join(x), generatedLevel)))
+                print(f"Save to {tileFileLocation}")
+
+                # Evaluation 1 ===========================================================================
+                # generatedLevel => (values)
+                generatedImage = Visualize.visualize(generatedLevel, sprites, spriteAsciiMap, pixelSize)
+                saveLocation = processString + "/" + "b_Generated.png"
+                generatedImage.save(saveLocation, "PNG")
+                print(f"Saved to {saveLocation}")
             except:
                 print(f"{selectedRepairMethod} not supported for {selectedGame}")
                 continue
 
-            tileFileLocation = processString + "/" + "before_repair.txt"
-            with open(tileFileLocation, 'w') as f:
-                f.write("\n".join(map(lambda x : "".join(x), generatedLevel)))
-            print(f"Save to {tileFileLocation}")
-
-            # Evaluation 1 ===========================================================================
-            # generatedLevel => (values)
-            generatedImage = Visualize.visualize(generatedLevel, sprites, spriteAsciiMap, pixelSize)
-            saveLocation = processString + "/" + "b_Generated.png"
-            generatedImage.save(saveLocation, "PNG")
-            print(f"Saved to {saveLocation}")
-            
             try:
                 consistencyGen = EvaluateMC.evaluate(generatedLevel, trainedEval)
                 closenessGen = EvaluatePixel.evaluate(inputImage_pil, generatedImage)
@@ -185,33 +185,5 @@ for selectedGenMethod in generateMethods:
                 #levelCompareRepair = EvaluateLevel.evaluate(testLevel, repairedLevel)
 
             except:
-                print("Cannot repair")
+                print(f"Cannot repair using {selectedRepairMethod}")
                 continue
-
-            # Plotting ===============================================================================
-            # print("Closeness After Gen: " + str(closenessGen))
-            # print("Closeness After Repair: " + str(closenessRepair))
-            # print("Conisitency After Gen: " + str(consistencyGen))
-            # print("Conisitency After Repair: " + str(consistencyRepair))
-
-            # EvalFile.write(methodInfoString + " Closeness After Gen: " + str(closenessGen) + "\n")
-            # EvalFile.write(methodInfoString + " Closeness After Repair: " + str(closenessRepair) + "\n")
-            # EvalFile.write(methodInfoString + " Conisitency After Gen: " + str(consistencyGen) + "\n")
-            # EvalFile.write(methodInfoString + " Conisitency After Repair: " + str(consistencyRepair) + "\n")
-            #EvalFile.write(methodInfoString + " LevelCheck After Gen: " + str(levelCompareGen) + "\n")
-            #EvalFile.write(methodInfoString + " LevelCheck After Repair: " + str(levelCompareRepair) + "\n")
-            #EvalFile.write("\n")
-
-            # if not ("Closeness_" + methodInfoString) in stats.keys():
-                # stats["Closeness_" + methodInfoString] = []
-            # stats["Closeness_" + methodInfoString] += [closenessRepair]
-
-            # if not ("Conisitency_" + methodInfoString) in stats.keys():
-                # stats["Conisitency_" + methodInfoString] = []
-            # stats["Conisitency_" + methodInfoString] += [consistencyRepair]
-
-            #if not ("LevelCompare_" + methodInfoString) in stats.keys():
-                #stats["LevelCompare_" + methodInfoString] = []
-            #stats["LevelCompare_" + methodInfoString] += [levelCompareRepair]
-
-#EvalFile.close()
