@@ -1,0 +1,15 @@
+{
+	"game_info": {
+		"shortname": "DALL-E Game 1",
+		"path-friendly-name": "dalle1"
+	},
+	"tiles_info": {
+		"sprites_extension": "png"
+	},
+    "tiles" : {
+        "X" : {"sprites": ["ground", "block", "top"], "props": ["solid"]}, 
+        "-" : {"sprites": ["sky"], "props": ["blank", "passable"]}, 
+        "E" : {"sprites": ["enemy", "enemy2"], "props": ["enemy", "damaging", "hazard", "moving"]}, 
+        "[" : {"sprites": ["green"], "props": ["solid", "pipe"]}
+    }
+}
