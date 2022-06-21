@@ -62,7 +62,8 @@ EvaluateMC.trainEval(asciiLevels, trainedEval)
 # Actual System=============================================================================
 # Actual image(s):
 
-imageFile = "./green-hills-landscape.png"
+#imageFile = "./green-hills-landscape.png"
+imageFile = "./dalle1.png"
 imageName = os.path.splitext(os.path.basename(imageFile))[0]
 inputImage_pil = Image.open(imageFile)
 inputImage_cv = cv2.imread(imageFile)
@@ -121,7 +122,9 @@ for selectedGenMethod in generateMethods:
             # Evaluation 1 ===========================================================================
             # generatedLevel => (values)
             generatedImage = Visualize.visualize(generatedLevel, sprites, spriteAsciiMap, pixelSize)
-            generatedImage.save(processString + "/" + "b_Generated.png", "PNG")
+            saveLocation = processString + "/" + "b_Generated.png"
+            generatedImage.save(saveLocation, "PNG")
+            print(f"Saved to {saveLocation}")
             consistencyGen = EvaluateMC.evaluate(generatedLevel, trainedEval)
             closenessGen = EvaluatePixel.evaluate(inputImage_pil, generatedImage)
             #levelCompareGen = EvaluateLevel.evaluate(testLevel, generatedLevel)
