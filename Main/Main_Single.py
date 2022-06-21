@@ -133,6 +133,11 @@ for selectedGenMethod in generateMethods:
             if(selectedGenMethod == 'Pixel'):
                 generatedLevel = PixelGen.generate(inputImage_cv, sprites, spriteAsciiMap, pixelSize, selectedPixelMethod)
 
+            tileFileLocation = processString + "/" + "generated.txt"
+            with open(tileFileLocation, 'w') as f:
+                f.write("\n".join(map(lambda x : "".join(x), generatedLevel)))
+            print(f"Save to {tileFileLocation}")
+
             # Evaluation 1 ===========================================================================
             # generatedLevel => (values)
             generatedImage = Visualize.visualize(generatedLevel, sprites, spriteAsciiMap, pixelSize)
