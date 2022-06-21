@@ -76,6 +76,9 @@ pixelSize = 16
 #asciiLevels, sprites, spriteAsciiMap = Inputs.Get_All_Inputs(dataLocation, selectedGame)
 asciiLevelsSMB2, spritesSMB2, spriteAsciiMapSMB2 = Inputs.Get_All_Inputs(dataLocation, "super-mario-bros-simplified")
 
+stringLevel = list(map(lambda x : "".join(x), post_level))
 
-generatedImage = Visualize.visualize(post_level, spritesSMB2, spriteAsciiMapSMB2, pixelSize)
+print(stringLevel)
+
+generatedImage = Visualize.visualize(stringLevel, spritesSMB2, spriteAsciiMapSMB2, pixelSize)
 generatedImage.save("b_Generated.png", "PNG")
