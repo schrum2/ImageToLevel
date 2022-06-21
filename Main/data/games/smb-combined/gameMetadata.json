@@ -1,0 +1,24 @@
+{
+	"game_info": {
+		"shortname": "Super Mario Bros Combined",
+		"path-friendly-name": "smb-combined"
+	},
+	"tiles_info": {
+		"sprites_extension": "png"
+	},
+    "tiles" : {
+        "X" : {"sprites": ["ground", "stair", "ground2", "stair2"], "props": ["solid"]}, 
+        "S" : {"sprites": ["brick", "brick2"], "props": ["solid", "breakable"]}, 
+        "-" : {"sprites": ["sky", "sky2"], "props": ["blank", "passable"]}, 
+        "?" : {"sprites": ["questionMark", "questionMark2"], "props":["solid", "question block"]},
+        "Q" : {"sprites": ["emptyBlock", "emptyBlock2"], "props": ["solid", "empty", "question block"]}, 
+        "E" : {"sprites": ["goomba", "goomba2"], "props": ["enemy", "damaging", "hazard", "moving"]}, 
+        "<" : {"sprites": ["topLeftPipe", "topLeftPipe2"], "props": ["solid", "topLeftPipe","pipe"]}, 
+        ">" : {"sprites": ["topRightPipe", "topRightPipe2"], "props": ["solid", "topRightPipe","pipe"]}, 
+        "[" : {"sprites": ["leftPipe", "leftPipe2"], "props": ["solid", "leftPipe","pipe"]}, 
+        "]" : {"sprites": ["rightPipe", "rightPipe2"], "props": ["solid", "rightPipe","pipe"]}, 
+        "o" : {"sprites": ["coin", "coin2"], "props": ["coin", "collectable", "passable"]},   
+        "B" : {"sprites": ["cannonTop", "cannonTop2"], "props": ["solid", "cannonTop", "cannon", "hazard"]},  
+        "b" : {"sprites": ["cannonBottom", "cannonBottom2"], "props": ["solid", "cannonBottom", "cannon", "hazard"]}
+    }
+}
