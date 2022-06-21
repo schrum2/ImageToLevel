@@ -14,5 +14,6 @@ typed-ast==1.4.1
 wrapt==1.11.2
 opencv-python
 scikit-image
+image_slicer
 
 # pip install torch==1.7.0+cpu torchvision==0.8.1+cpu torchaudio===0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
