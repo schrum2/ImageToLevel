@@ -39,7 +39,7 @@ generateMethods = ['CNN', 'Pixel']
 repairMethods = ['AutoEncoder', 'MarkovChain', 'Multi1']
 pixelMethods = ['img', 'histogram', 'avrg']
 MCMethods = ["NSEW", "NS", "EW", "SW", "NE", "NW"]
-pixelSize = 16
+pixelSize = 8 if selectedGame == "lode-runner-simplified" else 16
 
 # Training Models=========================================================================
 # Training Info:
@@ -89,8 +89,8 @@ w, h = inputImage_pil.size
 #outputLevelWidth = w // pixelSize
 #outputLevelHeight = h // pixelSize
 # Hard coding this to match the output size of DALL-E images
-outputLevelWidth = 16 #40
-outputLevelHeight = 16 #14
+outputLevelWidth = 32 if selectedGame == "lode-runner-simplified" else 16 
+outputLevelHeight = 32 if selectedGame == "lode-runner-simplified" else 16
 
 # Strech:
 dsize = (pixelSize * outputLevelWidth, pixelSize * outputLevelHeight)
