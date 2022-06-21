@@ -1,6 +1,18 @@
 # levels
 Turning images into 2-D video game levels
 
+## Jacob's instructions
+
+Go to the `Main` directory and run:
+```
+python Main_Single.py <input.png> <out_dir>
+```
+
+For example,
+```
+python Main_Single.py dalle1.png dalle1_test
+```
+
 ## HTML Server
 Quick manual setup of server (Not necessary to run the code. Skip ahead to run from command line)
 

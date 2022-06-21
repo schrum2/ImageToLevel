@@ -17,6 +17,18 @@ import Visualize
 import PixelGen
 import CNNGen
 
+import sys
+
+# Adding simple handling of command line parameters
+
+print(sys.argv)
+if len(sys.argv) < 3:
+    print("Should be following:\npython Main_Single.py <input.png> <out_dir>")
+    quit()
+# A PNG or other image file
+input_file = sys.argv[1]
+base_output_dir = sys.argv[2]
+
 # Locations and Methods:
 dataLocation = "./data/games/"
 gameOptions = sorted(os.listdir(dataLocation))
@@ -63,7 +75,8 @@ EvaluateMC.trainEval(asciiLevels, trainedEval)
 # Actual image(s):
 
 #imageFile = "./green-hills-landscape.png"
-imageFile = "./dalle1.png"
+#imageFile = "./dalle1.png"
+imageFile = input_file
 imageName = os.path.splitext(os.path.basename(imageFile))[0]
 inputImage_pil = Image.open(imageFile)
 inputImage_cv = cv2.imread(imageFile)
@@ -72,8 +85,9 @@ inputImage_cv = cv2.imread(imageFile)
 w, h = inputImage_pil.size
 #outputLevelWidth = w // pixelSize
 #outputLevelHeight = h // pixelSize
-outputLevelWidth = 40
-outputLevelHeight = 14
+# Hard coding this to match the output size of DALL-E images
+outputLevelWidth = 16 #40
+outputLevelHeight = 16 #14
 
 # Strech:
 dsize = (pixelSize * outputLevelWidth, pixelSize * outputLevelHeight)
@@ -86,7 +100,7 @@ inputImage_cv = cv2.resize(inputImage_cv, dsize)
 #inputImage_pil = inputImage_pil.crop((pixelSize * left, pixelSize * top, pixelSize * right, pixelSize * bottom))
 #inputImage_cv = inputImage_cv[0:0 + outputLevelHeight * pixelSize, level_start * pixelSize:level_start * pixelSize + outputLevelWidth * pixelSize]
 
-outputFolder = "./output_test_files/" + imageName + "_to_" + selectedGame + "/"
+outputFolder = "./" + base_output_dir + "/" + imageName + "_to_" + selectedGame + "/"
 if os.path.exists(outputFolder):
     shutil.rmtree(outputFolder)
 os.makedirs(outputFolder)
