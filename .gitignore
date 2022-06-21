@@ -154,3 +154,6 @@ AnacondaEnv.bat
 
 Main/Temp_for_AE/
 Main/repair_output/output_tensors/
+*.txt
+*.pickle
+*.pth
