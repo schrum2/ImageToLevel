@@ -133,7 +133,7 @@ for selectedGenMethod in generateMethods:
             if(selectedGenMethod == 'Pixel'):
                 generatedLevel = PixelGen.generate(inputImage_cv, sprites, spriteAsciiMap, pixelSize, selectedPixelMethod)
 
-            tileFileLocation = processString + "/" + "generated.txt"
+            tileFileLocation = processString + "/" + "before_repair.txt"
             with open(tileFileLocation, 'w') as f:
                 f.write("\n".join(map(lambda x : "".join(x), generatedLevel)))
             print(f"Save to {tileFileLocation}")
@@ -160,6 +160,12 @@ for selectedGenMethod in generateMethods:
             if(selectedRepairMethod == 'Multi1'):
                 repairedLevel = RepairAE.Repair(repairedLevel, tempFileLocation, imageName, spriteAsciiMap)
                 repairedLevel = RepairMC.Repair(repairedLevel, trainedMarkovChain, spriteAsciiMap, selectedMCMethod)
+
+
+            tileFileLocation = processString + "/" + "repaired.txt"
+            with open(tileFileLocation, 'w') as f:
+                f.write("\n".join(map(lambda x : "".join(x), repairedLevel)))
+            print(f"Save to {tileFileLocation}")
 
             # Evaluation 2 ===========================================================================
             # repairedLevel => (values)
