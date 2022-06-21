@@ -2,7 +2,7 @@
 Turning images into 2-D video game levels
 
 ## HTML Server
-Quick manual setup of server
+Quick manual setup of server (Not necessary to run the code. Skip ahead to run from command line)
 
 ```
 npm run build
@@ -19,6 +19,9 @@ http-server -c-1 -p 80
 ```
 
 ## Installation
+
+(These are the original instructions. See my additional notes below)
+
 ```
 git clone git@github.com:mattgallivan/levels.git
 cd levels
@@ -26,6 +29,14 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+From Jacob: I specifically used Python 3.7.11 (I made an Anaconda environment). The original requirements file tries to use a version of Pytorch that is no longer availble. Therefore, after the standard pip-install, you will need to install the old version of Pytorch using this command:
+
+```
+pip install torch==1.7.0+cpu torchvision==0.8.1+cpu torchaudio===0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+This is specifically the CPU version (not CUDA).
 
 ## Basic Example
 
@@ -72,7 +83,7 @@ are the desired width and height of the output level.
 Add a function inside repair.py with the following format:
 
 ```
-def repair_name_here(level, game):
+def repair_name_here(level, game, width, height):
     # ...
 ```
 
