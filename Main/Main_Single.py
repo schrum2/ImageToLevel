@@ -121,37 +121,37 @@ for selectedGenMethod in generateMethods:
 
     for selectedPixelMethod in pixelMethodsList:
         for selectedRepairMethod in repairMethods:
+            # Generate the level from the images======================================================
+            # inputImage => generatedLevel
             try:
-                # Generate the level from the images======================================================
-                # inputImage => generatedLevel
                 generatedLevel = []
                 if(selectedGenMethod == 'CNN'):
                     generatedLevel = CNNGen.generate(inputImage_cv, pixelSize, spriteAsciiMap, trainedCNN, patch_width, patch_height)
 
                 if(selectedGenMethod == 'Pixel'):
                     generatedLevel = PixelGen.generate(inputImage_cv, sprites, spriteAsciiMap, pixelSize, selectedPixelMethod)
-
-                methodInfoString = "Gen-" + selectedGenMethod + selectedPixelMethod + "_Rep-" + selectedRepairMethod
-                processString = (outputFolder + methodInfoString)
-                if not os.path.exists(processString):
-                    os.makedirs(processString)
-                inputImage_pil.save(processString + "/" + "a_Original_Resized.png", "PNG")
-
-                tileFileLocation = processString + "/" + "before_repair.txt"
-                with open(tileFileLocation, 'w') as f:
-                    f.write("\n".join(map(lambda x : "".join(x), generatedLevel)))
-                print(f"Save to {tileFileLocation}")
-
-                # Evaluation 1 ===========================================================================
-                # generatedLevel => (values)
-                generatedImage = Visualize.visualize(generatedLevel, sprites, spriteAsciiMap, pixelSize)
-                saveLocation = processString + "/" + "b_Generated.png"
-                generatedImage.save(saveLocation, "PNG")
-                print(f"Saved to {saveLocation}")
             except:
-                print(f"{selectedRepairMethod} not supported for {selectedGame}")
+                print(f"{selectedGenMethod} not supported for {selectedGame}")
                 continue
 
+            methodInfoString = "Gen-" + selectedGenMethod + selectedPixelMethod + "_Rep-" + selectedRepairMethod
+            processString = (outputFolder + methodInfoString)
+            if not os.path.exists(processString):
+                os.makedirs(processString)
+            inputImage_pil.save(processString + "/" + "a_Original_Resized.png", "PNG")
+
+            tileFileLocation = processString + "/" + "before_repair.txt"
+            with open(tileFileLocation, 'w') as f:
+                f.write("\n".join(map(lambda x : "".join(x), generatedLevel)))
+            print(f"Save to {tileFileLocation}")
+
+            # Evaluation 1 ===========================================================================
+            # generatedLevel => (values)
+            generatedImage = Visualize.visualize(generatedLevel, sprites, spriteAsciiMap, pixelSize)
+            saveLocation = processString + "/" + "b_Generated.png"
+            generatedImage.save(saveLocation, "PNG")
+            print(f"Saved to {saveLocation}")
+            
             try:
                 consistencyGen = EvaluateMC.evaluate(generatedLevel, trainedEval)
                 closenessGen = EvaluatePixel.evaluate(inputImage_pil, generatedImage)
