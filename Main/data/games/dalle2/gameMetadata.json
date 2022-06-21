@@ -1,0 +1,21 @@
+{
+	"game_info": {
+		"shortname": "DALL-E Level 2",
+		"path-friendly-name": "dalle2"
+	},
+	"tiles_info": {
+		"sprites_extension": "png"
+	},
+    "tiles" : {
+        "X" : {"sprites": ["ground", "stair", "black"], "props": ["solid"]}, 
+        "S" : {"sprites": ["brick", "wood"], "props": ["solid", "breakable"]}, 
+        "-" : {"sprites": ["sky", "green"], "props": ["blank", "passable"]}, 
+        "Q" : {"sprites": ["emptyBlock"], "props": ["solid", "empty", "question block"]}, 
+        "E" : {"sprites": ["goomba"], "props": ["enemy", "damaging", "hazard", "moving"]}, 
+        "<" : {"sprites": ["topLeftPipe"], "props": ["solid", "topLeftPipe","pipe"]}, 
+        ">" : {"sprites": ["topRightPipe"], "props": ["solid", "topRightPipe","pipe"]}, 
+        "[" : {"sprites": ["leftPipe"], "props": ["solid", "leftPipe","pipe"]}, 
+        "]" : {"sprites": ["rightPipe"], "props": ["solid", "rightPipe","pipe"]}, 
+        "o" : {"sprites": ["coin"], "props": ["coin", "collectable", "passable"]}
+    }
+}
