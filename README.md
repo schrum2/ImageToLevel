@@ -28,10 +28,11 @@ pip install -r requirements.txt
 ```
 
 ## Basic Example
-This will use an example zelda image and the Super Mario Bros. game data along with
-a random generator and no repair to generate a 4 x 3 level, printed to standard out.
+
+Basic example that creates a level based on a poor drawing. However, if does not apply any kind of repair, and thus seems to not produce a great output.
+
 ```
-python levels/levels.py zelda.png smb.json random nothing 4 3
+python levels/levels.py eugene-bad-drawing.png super-mario-bros-simplified/gameMetadata.json random nothing 16 11
 ```
 
 ## Usage Details
